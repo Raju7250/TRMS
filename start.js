@@ -13,7 +13,7 @@ app.use(flash());
 //for ejs files 
 app.set('view engine','ejs');
 app.set('views',path.join(__dirname,'/views'));
-app.set('views',path.join(__dirname,'/models'));
+// app.set('views',path.join(__dirname,'/models'));
 //for routes folder
 //app.use(express.urlencoded({extended:true}));
 const loginroute=require('./routes/login.js');
@@ -55,11 +55,8 @@ app.use('/bookspecificroom',bookspecificroomroute);
 app.use('/deleteaccount',deleteaccountroute);
 app.use('/viewallbookings',viewallbookingsroute);
 app.use('/viewmybookings',viewmybookingsroute);
-app.use(
-    (req,res)=>
-    {
-        res.send('<h1>"heyy this is TRMS project. you reached a wrong link"</h1><form action="/login" method="GET"> <button>LOGIN PAGE</button> </form>');
-    }
-    );
+
+app.use((req, res) => {
+  res.status(404).render('welcome'); // Renders the welcome page
+});
 app.listen(3000,()=>{console.log("listening on port 3000 by nodemon");});
-//console.log(User.findOne())
